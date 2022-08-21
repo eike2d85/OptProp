@@ -4,7 +4,6 @@ import numpy as np
 
 
 
-
 def Coefs(alpha, Re, nperfil):
     alpha_i = alpha
     alpha_f = alpha

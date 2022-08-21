@@ -41,14 +41,15 @@ while True:
     r.append(r[i]+r_step)
     i=i+1
 
-
-# r=np.transpose(r)
+    
 plt.figure()
-plt.plot(r,dT,label='dT x r')
+plt.plot(r,dT_v,label='dT x r')
 plt.legend(loc='best')
-plt.show()
 
-T = integrate.simpson(dT, r)
-Q = integrate.simpson(dQ, r)
-print('Tração[N]=', T)
+
+T = integrate.simpson(dT_v, r)
+Q = integrate.simpson(dQ_v, r)
+print('\nTração[N]=', T)
 print('Torque[N.m]=', Q)
+
+plt.show()

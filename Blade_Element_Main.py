@@ -41,8 +41,8 @@ while True:
     r.append(r[i]+r_step)
     i=i+1
 
-    
-plt.figure()
+
+plt.figure(1)
 plt.plot(r,dT_v,label='dT x r')
 plt.legend(loc='best')
 

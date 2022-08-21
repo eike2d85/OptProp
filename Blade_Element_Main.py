@@ -42,7 +42,7 @@ while True:
     i=i+1
 
 
-r=np.transpose(r)
+# r=np.transpose(r)
 plt.figure()
 plt.plot(r,dT,label='dT x r')
 plt.legend(loc='best')

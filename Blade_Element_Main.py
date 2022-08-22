@@ -3,6 +3,11 @@ import prop_input
 import matplotlib.pyplot as plt
 from scipy import integrate 
 from be_calc import be_calc
+'''
+Programa construido com base na teoria do elemento de pá "Aerodynamic Theory-A General Review of Progress-Vol IV
+Div.L(Airplane Propellers - H.Glauert)
+
+'''
 
 Parameters = prop_input.prop_input()
 # globals().update(Parameters)

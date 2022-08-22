@@ -1,5 +1,6 @@
 import numpy as np
-from airfoil_data import Coefs
+from Coefs import Coefs
+
 
 
 def be_calc(v_som,mi,rho,r,Vax,omega,alpha,nperfil,B,C):
@@ -11,14 +12,10 @@ def be_calc(v_som,mi,rho,r,Vax,omega,alpha,nperfil,B,C):
     theta = phi+alpha 
     corda = np.polyval(C,r) 
     Re = rho*W*corda/mi  # tem que ver pq devia ser corda média aerodinamica
-    data = Coefs((theta*180/np.pi),Re,nperfil)
-    if len(data)< 1:
-        print('EMPTY DATA FROM XFOIL')
-        Cl=0
-        Cd=0
-    else:
-        Cl = data[1]
-        Cd = data[2] + data[3]
+    
+    Cl = Coefs()
+    Cd = Coefs()
+    Cdp = Coefs()
 
     dT=0.5*B*corda*rho*W**2*(Cl*np.cos(phi)-Cd*np.sin(phi)) 
     dQ=0.5*B*corda*r*rho*W**2*(Cl*np.sin(phi)+Cd*np.cos(phi)) 

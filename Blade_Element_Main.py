@@ -3,6 +3,7 @@ import prop_input
 import matplotlib.pyplot as plt
 from scipy import integrate 
 from be_calc import be_calc
+from xfoil_init_airfoil import xfoil_init_airfoil
 '''
 Programa construido com base na teoria do elemento de pá "Aerodynamic Theory-A General Review of Progress-Vol IV
 Div.L(Airplane Propellers - H.Glauert)
@@ -10,7 +11,6 @@ Div.L(Airplane Propellers - H.Glauert)
 '''
 
 Parameters = prop_input.prop_input()
-# globals().update(Parameters)
 B = Parameters[0] # Numero de pás
 D = Parameters[1] # Diametro da hélice
 R = Parameters[2] # Raio da hélice
@@ -30,6 +30,8 @@ C = Parameters[12] # coef do polinômio de ajuste das cordas
 rho = 1.225  # em kg/m³
 mi = 1.7894e-5  # em kg/m.s
 v_som = 340  # em m/s
+
+
 
 r_step = 10**(-3)
 i = 0

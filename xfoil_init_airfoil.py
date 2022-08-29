@@ -8,7 +8,8 @@ def xfoil_init_airfoil(nperfil,Re_min,Re_max,Re_step,alpha_i,alpha_f,alpha_step,
     Cl_data = []
     Cd_data = []
     Cdp_data = []    
-    for Re in range(Re_min,Re_max,Re_step):
+    H_bisco_Re = np.arange(Re_min, Re_max, Re_step)
+    for Re in H_bisco_Re:
         data = fixed_Re_calc(alpha_i,alpha_f,alpha_step,Re,nperfil,n_iter)
         Cl_data.append(data[:,1])
         Cd_data.append(data[:,2])

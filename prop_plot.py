@@ -6,9 +6,14 @@ def prop_plot(C, r, R_hub, R_root, theta_v):
     C_proj = np.multiply(C_tot,(np.cos(theta_v)))
     C_front = C_proj/4
     C_back = C_proj - C_front
+    an = np.linspace(0, 2 * np.pi, 100)
     plt.figure(2)
     plt.plot(r,-C_front)
     plt.plot(r, C_back)
+    plt.plot(R_root * np.cos(an), R_root * np.sin(an))
+    plt.plot(R_hub * np.cos(an), R_hub * np.sin(an))
+    plt.plot((0,r[len(r)-1]),(0,0))
+    plt.axis('equal')
     plt.show()
     return 
 

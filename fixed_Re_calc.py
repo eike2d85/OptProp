@@ -8,11 +8,13 @@ def xfoil_init_airfoils(nperfil):
 Cl = xfoil_init_airfoils('Clark_Y')
 
 print(Cl)'''
-
+import os
 import subprocess as sp
 import numpy as np
 
 def fixed_Re_calc(alpha_i,alpha_f,alpha_step,Re,nperfil,n_iter):
+    if os.path.exists(nperfil + '.txt'): 
+        os.remove(nperfil + '.txt')
     input_file = open("input_file.in", 'w')
     input_file.write("LOAD {0}.dat\n".format(nperfil))
     input_file.write(nperfil + '\n')
@@ -37,7 +39,7 @@ alpha_step = 1
 Re = 1000000
 n_iter = 100
 dados = fixed_Re_calc(alpha_i, alpha_f, alpha_step, Re, nperfil, n_iter)
-print(dados[:,1])
+print(dados)
 '''
 
 # print(Clfun(alpha_i, alpha_f, alpha_step, Re, nperfil, n_iter))

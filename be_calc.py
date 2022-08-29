@@ -13,7 +13,7 @@ def be_calc(v_som,mi,rho,r,Vax,omega,alpha,nperfil,B,C):
     corda = np.polyval(C,r) 
     Re = rho*W*corda/mi  # tem que ver pq devia ser corda média aerodinamica
     
-    Cl = Coefs()
+    Cl = Coefs(nperfil, alpha, Re)
     Cd = Coefs()
     Cdp = Coefs()
 

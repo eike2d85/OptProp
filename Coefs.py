@@ -10,7 +10,6 @@ alpha_f = 20
 alpha_step = 1
 n_iter = 100
 
-
 H_bisco_Re = np.arange(Re_min, Re_max, Re_step)
 H_bisco_alpha = np.arange(alpha_i,alpha_f,alpha_step)
 

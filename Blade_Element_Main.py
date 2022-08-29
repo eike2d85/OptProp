@@ -3,6 +3,7 @@ import prop_input
 import matplotlib.pyplot as plt
 from scipy import integrate 
 from be_calc import be_calc
+from prop_plot import prop_plot
 from xfoil_init_airfoil import xfoil_init_airfoil
 '''
 Programa construido com base na teoria do elemento de pá "Aerodynamic Theory-A General Review of Progress-Vol IV
@@ -26,6 +27,7 @@ pos_c = Parameters[11] # vetor de posição das cordas ao longo do raio
 C = Parameters[12] # coef do polinômio de ajuste das cordas
 
 
+
 # PARÂMETROS ATMOSFÉRICOS
 rho = 1.225  # em kg/m³
 mi = 1.7894e-5  # em kg/m.s
@@ -38,11 +40,13 @@ i = 0
 r = []
 dT_v = []
 dQ_v = []
+theta_v = []
 r.append(pos_c[0])
 while True:
     Vr,W,phi,theta,corda,Re,Cl,Cd,dT,dQ = be_calc(v_som,mi,rho,r[i],Vax,omega,alpha,nperfil,B,C)
     dT_v.append(dT)
     dQ_v.append(dQ)
+    theta_v.append(theta)
     if r[i]>=R:
         break
     r.append(r[i]+r_step)
@@ -58,5 +62,7 @@ T = integrate.simpson(dT_v, r)
 Q = integrate.simpson(dQ_v, r)
 print('\nTração[N]=', T)
 print('Torque[N.m]=', Q)
+
+prop_plot(C, r, R_hub, R_root, theta_v)
 
 plt.show()

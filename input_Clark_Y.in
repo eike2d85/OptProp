@@ -1,0 +1,13 @@
+LOAD Clark_Y.dat
+Clark_Y
+PANE
+OPER
+Visc 1205000
+PACC
+Clark_YRe1205000.txt
+
+ITER 100
+ASeq 0 20 1
+
+
+quit

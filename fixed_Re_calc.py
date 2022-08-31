@@ -31,16 +31,16 @@ def fixed_Re_calc(alpha_i,alpha_f,alpha_step,Re,nperfil,n_iter):
     sp.call("xfoil.exe < input_file.in", shell=True)
     Coef = np.loadtxt(nperfil+'.txt', skiprows=12)
     return Coef
-'''
+
 nperfil = 'NACA2412'
 alpha_i = 0
-alpha_f = 20
+alpha_f = 30
 alpha_step = 1
-Re = 1000000
+Re = 5000
 n_iter = 100
 dados = fixed_Re_calc(alpha_i, alpha_f, alpha_step, Re, nperfil, n_iter)
 print(dados)
-'''
+
 
 # print(Clfun(alpha_i, alpha_f, alpha_step, Re, nperfil, n_iter))
 

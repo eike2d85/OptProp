@@ -2,9 +2,6 @@ import os
 import numpy as np
 import subprocess as sp
 import pandas as pd
-
-
-
 Re_min = 5000
 Re_max = 1205000
 Re_step =200000
@@ -12,14 +9,10 @@ alpha_i = 0
 alpha_f = 20
 alpha_step = 1
 n_iter = 100
-
-
 a = {}
-b = {}
-airfoil_list = ['NACA2412', 'NACA0012','Clark_Y']
-
+airfoil_list = ['NACA2412','Clark_Y']
+# airfoil_list = ['NACA2412']
 for nperfil in airfoil_list:
-
     for Re in range(Re_min, Re_max+Re_step, Re_step):
         Re_str = str(Re)
         if os.path.exists(nperfil +'Re'+ Re_str + '.txt'): 
@@ -38,9 +31,20 @@ for nperfil in airfoil_list:
         a['input_'+ nperfil].write("quit\n")
         a['input_'+ nperfil].close()
         sp.call('xfoil.exe < input_' + nperfil + '.in', shell=True)
-        #temp_data = np.loadtxt(nperfil+'.txt', skiprows=12)
-    #temp_data= pd.read_csv(nperfil+'.txt', skiprows=12)
-    #print('data_temp:',temp_data)
+        aoa = pd.DataFrame(np.loadtxt(nperfil +'Re'+ Re_str + '.txt', skiprows=12)[:,0])
+        Cl = pd.DataFrame(np.loadtxt(nperfil +'Re'+ Re_str + '.txt', skiprows=12)[:,1])
+        Cd =  pd.DataFrame(np.loadtxt(nperfil +'Re'+ Re_str + '.txt', skiprows=12)[:,2])
+        Cdp =  pd.DataFrame(np.loadtxt(nperfil +'Re'+ Re_str + '.txt', skiprows=12)[:,3])
+        # Re_number = pd.DataFrame([Re] * len(aoa))
+        with pd.ExcelWriter(nperfil+'.xlsx', mode='a', if_sheet_exists="overlay") as writer:
+            aoa.to_excel(writer,sheet_name=Re_str,startcol=0, index=False, header= False, merge_cells= False)
+            Cl.to_excel(writer,sheet_name=Re_str,startcol=1, index=False, header= False, merge_cells= False)
+            Cd.to_excel(writer,sheet_name=Re_str,startcol=2, index=False, header= False, merge_cells= False)
+            Cdp.to_excel(writer,sheet_name=Re_str,startcol=3, index=False, header= False, merge_cells= False)
+            # Re_number.to_excel(writer,sheet_name=Re_str,startcol=4, index=False, header= False, merge_cells= False)
+            
         
+
+            
 
 

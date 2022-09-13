@@ -2,9 +2,9 @@ LOAD Clark_Y.dat
 Clark_Y
 PANE
 OPER
-Visc 1205000
+Visc 1404000
 PACC
-Clark_YRe1205000.txt
+Clark_YRe1404000.txt
 
 ITER 100
 ASeq 0 20 1

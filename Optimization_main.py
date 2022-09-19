@@ -5,6 +5,11 @@ import prop_input
 from data_gen_main import data_gen_main
 from airfoil_sim_parameters import airfoil_sim_parameters, qtd_airfoil
 from BEM_opt_call import BEM_opt_call
+
+def printCurrentIteration(xk, convergence):
+    print('finished iteration')
+    print(xk)
+    print(convergence)
     
 Opt_activate = 1
 generate_data = 0
@@ -51,8 +56,8 @@ if Opt_activate ==  0:
     print('Torque {N.m]:', Q)
 
 else:
-    bounds = [(0.12,0.16),(2, 12),(0, qtd_airfoil),(0.01, 2*R_hub),(0.01, 0.03),
+    bounds = [(0.12,0.16),(2, 12),(0, 1),(0.01, 2*R_hub),(0.01, 0.03),
     (0.025, 0.04),(0.025, 0.04),(0.02,0.035),(0.015, 0.025),(0.015,0.025),(0.01,0.020),(0.01,0.015),(0.005,0.010)]
-    result = differential_evolution(BEM_opt_call, bounds, args=(Opt_activate,v_som,mi,rho,B,Vax,omega,R_hub,R_root))
+    result = differential_evolution(BEM_opt_call, bounds, args=(Opt_activate,v_som,mi,rho,B,Vax,omega,R_hub,R_root), disp=True, callback=printCurrentIteration, maxiter=3)
     result.x, result.fun
     print(result)

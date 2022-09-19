@@ -26,7 +26,8 @@ def BEM_opt_call(opt_input,Opt_activate,v_som,mi,rho,B,Vax,omega,R_hub,R_root):
     C = np.polyfit(pos_c,c,5) # coef. do polinômio Corda em função do raio
 
 
-    obj = Blade_Element_Main(B,R,R_hub,R_root,omega,Vax,alpha,nperfil,C,v_som,mi,rho,Opt_activate)
+    obj= Blade_Element_Main(B,R,R_hub,R_root,omega,Vax,alpha,nperfil,C,v_som,mi,rho,Opt_activate)
+
 
 
     return obj

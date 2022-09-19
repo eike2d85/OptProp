@@ -11,13 +11,19 @@ H_bisco_alpha = np.arange(alpha_i,alpha_f,alpha_step)
     
 def airfoil_data_get(nperfil, alpha, Re):
     alpha = alpha*180/np.pi
+    if Re<Re_min:
+        Re=Re_min
+        print('Reynolds menor que banco de dados')
+    if Re>Re_max:
+        Re=Re_max
+        print('Reynolds maior que banco de dados')
     j=0
     for Rey in H_bisco_Re:
-        if Re > Rey:
+        if Re >= Rey:
             Rey_maior = Rey + Re_step
             Rey_menor = Rey
             for aoa in H_bisco_alpha:
-                if alpha > aoa:
+                if alpha >= aoa:
                     aoa_maior = aoa+alpha_step
                     aoa_menor = aoa 
                     j_save = j 

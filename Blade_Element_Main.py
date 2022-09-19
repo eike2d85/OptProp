@@ -64,7 +64,7 @@ def Blade_Element_Main(B,R,R_hub,R_root,omega,Vax,alpha,nperfil,C,v_som,mi,rho,O
         i=i+1
     T = integrate.simpson(dT_v, r)
     Q = integrate.simpson(dQ_v, r)
-    prop_plot(C, r, R_hub, R_root, theta_v)
+    # prop_plot(C, r, R_hub, R_root, theta_v)
     eff_inv = Q/T
 
     if Opt_activate ==0:

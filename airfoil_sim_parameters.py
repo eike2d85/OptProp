@@ -8,7 +8,7 @@ alpha_f = 20
 alpha_step = 1
 n_iter = 100
 airfoil_list = ['NACA2412', 'Clark_Y']
-qtd_airfoil = (len(airfoil_list)) - 1
+qtd_airfoil = (len(airfoil_list))
 
 def airfoil_sim_parameters():
 

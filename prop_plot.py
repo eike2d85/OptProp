@@ -1,27 +1,32 @@
 import numpy as np
-import canvas
 import matplotlib.pyplot as plt
 
-def prop_plot(C, r, R_hub, R_root, theta_v):
+def prop_plot(C, r, R_hub, R_root, theta_v, T, Q, eff):
 
-    C_tot = np.polyval(C,r)
+    # C_tot = np.polyval(C,r)
+    C_tot = C(r)
     C_proj = np.multiply(C_tot,(np.cos(theta_v)))
     C_front = C_proj/4
     C_back = C_proj - C_front
     an = np.linspace(0, 2 * np.pi, 100)
-    plt.ion()
-    jureg = 0
-    if jureg == 0:
-        plt.figure(2)
-        plt.plot(r,-C_front)
-        plt.plot(r, C_back)
-        plt.plot(R_root * np.cos(an), R_root * np.sin(an))
-        plt.plot(R_hub * np.cos(an), R_hub * np.sin(an))
-        plt.plot((0,r[len(r)-1]),(0,0))
-        plt.axis('equal')
-        plt.show()
-        
-        
+    if plt.fignum_exists(1):
+       plt.clf()
+    plt.figure(1)
+    plt.plot(r,-C_front, label='Leading Edge')
+    plt.plot(r, C_back, label='Trailing Edge')
+    # plt.plot(R_root * np.cos(an), R_root * np.sin(an), label='Root Radius')
+    plt.plot([R_root, R_root], [-R_root, R_root],"--", label='Root Radius')
+    plt.plot(R_hub * np.cos(an), R_hub * np.sin(an), label='Hub Radius')
+    plt.plot((0,r[len(r)-1]),(0,0))
+    plt.text(0,1.5*R_root, "T[N] = %.2f\nQ[Nm] = %.2f\neff = %.2f" %(T,Q,eff), fontsize = 10)
+    plt.legend(loc='best')
+    plt.axis('equal')
+    plt.draw()
+    plt.pause(0.1)
+    # fig.canvas.draw()
+    plt.show(block=False)
+    
+    # plt.clf()    
     return 
 
 '''

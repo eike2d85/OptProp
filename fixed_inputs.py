@@ -7,10 +7,12 @@ def fixed_inputs():
 
     # VARIÁVEIS DE ENTRADA PARA A OTIMIZAÇÃO
     B=2
-    Vax = 1
-    RPM = 14000
+    R = 0.16
+    Vax = 5
+    P_disp = 800 #potência do motor em [W]
+    RPM = 14000 #rpm onde está o pico da curva de potência
     omega=2*np.pi*RPM/60 # Velocidade angular em Rad/s
-    R_hub=0.01 # raio do cubo
-    R_root=0.015 # raio sem atuação aerodinâmica em m
+    R_hub=0.0125 # raio do cubo
+    R_root=0.03 # raio sem atuação aerodinâmica em m
 
-    return rho, mi, v_som, B, Vax, omega, R_hub, R_root
+    return rho, mi, v_som, B, Vax, omega, R_hub, R_root, P_disp, R

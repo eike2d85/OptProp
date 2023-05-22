@@ -31,10 +31,10 @@ def BEM_opt_call(solution, solution_idx):
     obj, T, Q = Blade_Element_Main(B,R,R_hub,R_root,omega,Vax,beta,nperfil,C,v_som,mi,rho,P_disp,n, c, pos_c, Beta)
     eff = 1/obj
 
-    helice = [solution[0], solution[0]]
+
+    helice_row = []
     helice = {
             "inputs": solution,
-            "nperfil": solution[0],
             "B": B,
             "R": R,
             "Vax": Vax,
@@ -46,6 +46,15 @@ def BEM_opt_call(solution, solution_idx):
             "Q": Q
     }
 
+    # Iterar sobre as chaves (k) e valores (v) do dicionario
+    for k, v in helice.items():
+        if type(v) == list: # Se o valor for uma lista, iterar sobre ela
+            for input in v:
+                helice_row.append(input)
+        else:
+            helice_row.append(v)
+
+
     global helices_list
     if 'helices_list' not in globals():
         helices_list = []
@@ -54,5 +63,12 @@ def BEM_opt_call(solution, solution_idx):
     else:
         if eff>0.01:
             helices_list.append(helice)
+
+    global helices_matrix
+    if "helices_matrix" not in globals():
+        helices_matrix = []
+        helices_matrix.append(helice_row)
+    else:
+        helices_matrix.append(helice_row)
         
     return obj

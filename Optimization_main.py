@@ -1,4 +1,3 @@
-from stat import FILE_ATTRIBUTE_NOT_CONTENT_INDEXED
 import os
 import pygad
 import numpy as np
@@ -7,6 +6,7 @@ from fixed_inputs import fixed_inputs
 from data_gen_main import data_gen_main
 from airfoil_sim_parameters import airfoil_sim_parameters, qtd_airfoil
 from BEM_opt_call import BEM_opt_call
+from excel_utils import write_to_excel
 
 def callback_gen(ga_instance):
     print("Generation : ", ga_instance.generations_completed)
@@ -59,9 +59,15 @@ ga_instance.save("pygad_GA")
 #print(best_solution)
 #print(best_solution_fitness)
 helices_list = BEM_opt_call.__globals__["helices_list"]
+helices_matrix = BEM_opt_call.__globals__["helices_matrix"]
+
 if os.path.exists('results.txt'): 
             os.remove('results.txt')
+            os.remove('results.xlsx')
 with open('results.txt', 'w') as data:
     data.write(str(helices_list))
+
+write_to_excel(helices_matrix)
+
 # print(helices_list)
     

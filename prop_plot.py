@@ -1,13 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def prop_plot(C, r, R_hub, R_root, theta_v, T, Q, eff):
-
-    # C_tot = np.polyval(C,r)
+def prop_plot(C, r, R_hub, R_root, beta_v, T, Q, eff, Corda_input_v, pos_c, Beta_input_v,R):
     C_tot = C(r)
-    C_proj = np.multiply(C_tot,(np.cos(theta_v)))
-    C_front = C_proj/4
-    C_back = C_proj - C_front
+    C_proj = np.multiply(C_tot,(np.cos(beta_v)))
+    C_front = C_proj*0.25
+    C_back = C_proj*0.75
     an = np.linspace(0, 2 * np.pi, 100)
     if plt.fignum_exists(1):
        plt.clf()
@@ -16,8 +14,12 @@ def prop_plot(C, r, R_hub, R_root, theta_v, T, Q, eff):
     plt.plot(r, C_back, label='Trailing Edge')
     # plt.plot(R_root * np.cos(an), R_root * np.sin(an), label='Root Radius')
     plt.plot([R_root, R_root], [-R_root, R_root],"--", label='Root Radius')
+    plt.plot([pos_c[0], pos_c[0]], [-0.25*Corda_input_v[0]*np.cos(Beta_input_v[0]*np.pi/180), 0.75*Corda_input_v[0]*np.cos(Beta_input_v[0]*np.pi/180)],"--")
+    plt.plot([pos_c[1], pos_c[1]], [-0.25*Corda_input_v[1]*np.cos(Beta_input_v[1]*np.pi/180), 0.75*Corda_input_v[1]*np.cos(Beta_input_v[1]*np.pi/180)],"--")
+    plt.plot([pos_c[2], pos_c[2]], [-0.25*Corda_input_v[2]*np.cos(Beta_input_v[2]*np.pi/180), 0.75*Corda_input_v[2]*np.cos(Beta_input_v[2]*np.pi/180)],"--")
+    plt.plot([pos_c[3], pos_c[3]], [-0.25*Corda_input_v[3]*np.cos(Beta_input_v[3]*np.pi/180), 0.75*Corda_input_v[3]*np.cos(Beta_input_v[3]*np.pi/180)],"--")    
     plt.plot(R_hub * np.cos(an), R_hub * np.sin(an), label='Hub Radius')
-    plt.plot((0,r[len(r)-1]),(0,0))
+    plt.plot((0,R),(0,0))
     plt.text(0,1.5*R_root, "T[N] = %.2f\nQ[Nm] = %.2f\neff = %.2f" %(T,Q,eff), fontsize = 10)
     plt.legend(loc='best')
     plt.axis('equal')

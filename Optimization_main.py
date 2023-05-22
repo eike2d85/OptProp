@@ -15,7 +15,7 @@ def callback_gen(ga_instance):
 
 generate_data = 0
 
-rho, mi, v_som, B, Vax, omega, R_hub, R_root, P_disp, R= fixed_inputs()
+rho, mi, v_som, B, Vax, omega, R_hub, R_root, P_disp, R, n= fixed_inputs()
 
 # PARÂMETROS DE SIMULAÇÃO DOS PERFIS
 Re_min,Re_max,Re_step,alpha_i,alpha_f,alpha_step,n_iter,airfoil_list = airfoil_sim_parameters()
@@ -25,29 +25,36 @@ if generate_data == 1:
 
 
 '''
-bounds = [{'low': 2, 'high': 10}, {'low': 0, 'high': qtd_airfoil},{'low': 0.01, 'high': 0.03},
-{'low': 0.01, 'high': 0.03},{'low': 0.025, 'high': 0.04},{'low': 0.025, 'high': 0.04},{'low': 0.02, 'high': 0.035},
-{'low': 0.015, 'high': 0.025},{'low': 0.015, 'high': 0.025},{'low': 0.01, 'high': 0.015},{'low': 0.01, 'high': 0.015},
-{'low': 0.005, 'high': 0.01}]
+bounds = [{'low': 0, 'high': qtd_airfoil},{'low': 0.010, 'high': 0.060},
+{'low': 0.010, 'high': 0.060},{'low': 0.005, 'high': 0.050},{'low': 0.005, 'high': 0.040},{'low': 15, 'high': 70},
+{'low': 10, 'high': 65},{'low': 5, 'high': 60},{'low': 1, 'high': 40}]
 '''
-bounds = [{'low': 2, 'high': 10}, {'low': 0, 'high': qtd_airfoil},{'low': 0.01, 'high': 0.035},
-{'low': 0.005, 'high': 0.035},{'low': 0.005, 'high': 0.035},{'low': 0.005, 'high': 0.015}]
-ga_instance = pygad.GA(num_generations=5000,
-                    num_parents_mating=2,
+bounds = [{'low': 0, 'high': qtd_airfoil},{'low': 0.030, 'high': 0.150},
+{'low': 0.030, 'high': 0.150},{'low': 0.030, 'high': 0.150},{'low': 0.030, 'high': 0.100},{'low': 15, 'high': 70},
+{'low': 10, 'high': 65},{'low': 5, 'high': 60},{'low': 1, 'high': 40}]
+ga_instance = pygad.GA(num_generations=2000,
+                    num_parents_mating=8,
                     fitness_func=BEM_opt_call,
-                    sol_per_pop=5,
-                    num_genes=6,
-                    gene_type=[float, int, float, float, float, float],
+                    sol_per_pop=20,
+                    num_genes=9,
+                    gene_type=[int, float, float, float, float, float, float, float, float],
                     gene_space=bounds,
                     on_generation=callback_gen,
-                    parent_selection_type="rank",
-                    crossover_type="uniform",
-                    crossover_probability=0.8
+                    parent_selection_type="sss",
+                    keep_parents=-1,
+                    crossover_type="single_point",
+                    crossover_probability=0.8,
+                    mutation_percent_genes=80,
+                    mutation_num_genes=5,
+                    mutation_type = "random",
+                    save_solutions=True,
+                    suppress_warnings=True,
+                    allow_duplicate_genes=False
                     )
 ga_instance.run()
 best_solution, best_solution_fitness, best_match_idx = ga_instance.best_solution()
 ga_instance.plot_fitness()
-# ga_instance.plot_genes()
+ga_instance.plot_genes()
 ga_instance.save("pygad_GA")
 #print(best_solution)
 #print(best_solution_fitness)

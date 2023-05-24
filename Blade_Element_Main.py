@@ -49,24 +49,20 @@ def Blade_Element_Main(B,R,R_hub,R_root,omega,Vax,Beta,nperfil,C,v_som,mi,rho,P_
     eff = Ct*J/Cp
     
     if Q*omega>P_disp:
-        eff = 1e-5 # Penalização por passar do torque que o motor pode fornecer.
+        eff = 1e-10 # Penalização por passar do torque que o motor pode fornecer.
         print('penalizei por passar do torque disponível')
     
     for verify_corda in r:
         if C(verify_corda)< C(R):
-            eff = 1e-5
+            eff = 1e-10
             #print("penalizei por ter corda pequena")
             break
 
     for verify_alpha in alpha_v:
-        if verify_alpha> 20*np.pi/180:
-            eff = 1e-5
+        if verify_alpha> 15*np.pi/180 or verify_alpha<0:
+            eff = 1e-10
             #print("penalizei por ter alpha muito grande")
             break
-    '''
-    if eff == 1e-5:
-            break
-    '''
 
 
     global eff_max

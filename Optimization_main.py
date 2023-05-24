@@ -10,7 +10,7 @@ from excel_utils import write_to_excel
 
 def callback_gen(ga_instance):
     print("Generation : ", ga_instance.generations_completed)
-    print("Fitness of the best solution :", ga_instance.best_solution()[0])
+    #print("Fitness of the best solution :", ga_instance.best_solution()[0])
     return
 
 generate_data = 0
@@ -32,7 +32,7 @@ bounds = [{'low': 0, 'high': qtd_airfoil},{'low': 0.010, 'high': 0.060},
 bounds = [{'low': 0, 'high': qtd_airfoil},{'low': 0.030, 'high': 0.150},
 {'low': 0.030, 'high': 0.150},{'low': 0.030, 'high': 0.150},{'low': 0.030, 'high': 0.100},{'low': 15, 'high': 70},
 {'low': 10, 'high': 65},{'low': 5, 'high': 60},{'low': 1, 'high': 40}]
-ga_instance = pygad.GA(num_generations=2000,
+ga_instance = pygad.GA(num_generations=5000,
                     num_parents_mating=8,
                     fitness_func=BEM_opt_call,
                     sol_per_pop=20,
@@ -49,7 +49,7 @@ ga_instance = pygad.GA(num_generations=2000,
                     mutation_type = "random",
                     save_solutions=True,
                     suppress_warnings=True,
-                    allow_duplicate_genes=False
+                    allow_duplicate_genes=True
                     )
 ga_instance.run()
 best_solution, best_solution_fitness, best_match_idx = ga_instance.best_solution()
@@ -58,16 +58,13 @@ ga_instance.plot_genes()
 ga_instance.save("pygad_GA")
 #print(best_solution)
 #print(best_solution_fitness)
-helices_list = BEM_opt_call.__globals__["helices_list"]
+
 helices_matrix = BEM_opt_call.__globals__["helices_matrix"]
-
-if os.path.exists('results.txt'): 
-            os.remove('results.txt')
+if os.path.exists('results.xlsx'): 
             os.remove('results.xlsx')
-with open('results.txt', 'w') as data:
-    data.write(str(helices_list))
-
+print("Escrevendo resultados na planilha")
 write_to_excel(helices_matrix)
+print("Feito, pode ir lá abrir")
 
-# print(helices_list)
+
     

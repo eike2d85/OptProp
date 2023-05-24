@@ -23,10 +23,10 @@ def be_calc(v_som,mi,rho,r,Vax,omega,Beta,nperfil,B,C,R,R_hub):
         Re = W*corda/mi
         #Cl,Cd,Cdp = airfoil_data_get(nperfil, alpha, Re) # fazer convergir o Cl novo com o Cl inputado
         #Cd = Cd+Cdp
-        #Cl=0.7
-        #Cd = 0.02
-        Cl = 0.0887*(alpha*180/np.pi)+0.3497
-        Cd = 0.0024*(alpha*180/np.pi)+0.0178
+        Cl=0.7
+        Cd = 0.02
+        #Cl = 0.0887*(alpha*180/np.pi)+0.3497
+        #Cd = 0.0024*(alpha*180/np.pi)+0.0178
         Cy=(Cl*np.cos(phi)-Cd*np.sin(phi)) 
         Cx=(Cl*np.sin(phi)+Cd*np.cos(phi)) 
         K = Cy/(4*(np.sin(phi))**2)

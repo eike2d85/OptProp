@@ -37,5 +37,5 @@ def write_to_excel(helices_matrix: list[list]):
     
     wb.save("results.xlsx")
 
-helices_matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-write_to_excel(helices_matrix)
+#helices_matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+#write_to_excel(helices_matrix)

@@ -48,7 +48,7 @@ def BEM_opt_call(solution, solution_idx):
 
     # Iterar sobre as chaves (k) e valores (v) do dicionario
     for k, v in helice.items():
-        if type(v) == list: # Se o valor for uma lista, iterar sobre ela
+        if type(v) == np.ndarray: # Se o valor for uma numpy array, iterar sobre ela
             for input in v:
                 helice_row.append(input)
         else:
@@ -72,3 +72,7 @@ def BEM_opt_call(solution, solution_idx):
         helices_matrix.append(helice_row)
         
     return obj
+'''
+solution = [0, 0.045818459,	0.042164975,	0.04986876,	0.030721921,	45.77508982,	25.76295028,	16.34320251,	6.917889606]
+BEM_opt_call(solution,0)
+'''
